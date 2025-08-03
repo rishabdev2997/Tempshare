@@ -1,6 +1,3 @@
-Here’s a colorful and well-formatted `README.md` for your **TempShare Microservices File Sharing App**, complete with emojis and structured markdown for clarity and style:
-
----
 
 # 📁 TempShare – Microservices File Sharing App
 
