@@ -1,137 +1,137 @@
+🎨 TempShare Frontend
+This is the Next.js 14 frontend for the TempShare microservices file-sharing platform. It offers a clean and responsive interface for uploading, sharing, and downloading files with optional expiry settings.
 
-# 📁 TempShare – Microservices File Sharing App
+🖥️ Live Preview (Optional)
+🧪 Live Demo: https://tempshare.example.com
+(Add once deployed)
 
-TempShare is a **microservices-based file-sharing** application built using **Spring Boot**. It allows users to securely upload files, share them via **short links**, and set optional **expiry rules** (time-based or download limit).
-It leverages **Supabase** for both **object storage** and **PostgreSQL database**.
+⚙️ Tech Stack
+Next.js 14 (App Router)
 
----
+TypeScript
 
-## 🧱 Architecture Overview
+ShadCN UI + Tailwind CSS
 
-| Service                 | Description                                              |
-| ----------------------- | -------------------------------------------------------- |
-| 🔀 **API Gateway**      | Routes external requests to internal microservices       |
-| ⬆️ **Upload Service**   | Handles file uploads and stores metadata in Supabase     |
-| ⬇️ **Download Service** | Serves files via short links, checks expiry conditions   |
-| 📝 **Metadata Service** | Manages file metadata (CRUD operations)                  |
-| ⏳ **Expiry Service**    | Scheduled cleanup of expired files or max-download files |
-| 🗄️ **Storage Adapter** | Wrapper for interacting with Supabase Storage API        |
+Framer Motion (for animations)
 
----
+Axios (for API requests)
 
-## 📁 Folder Structure
+JWT-based Auth (optional)
 
-```
-project-root/
-├── api-gateway/
-├── upload-service/
-├── download-service/
-├── metadata-service/
-├── expiry-service/
-├── storage-adapter/
-├── docker-compose.yml
+📁 Folder Structure
+php
+Copy
+Edit
+frontend/
+├── app/                # App Router pages & layouts
+│   ├── upload/         # Upload file page
+│   ├── download/       # Download file page
+│   ├── status/         # View file metadata
+│   └── layout.tsx      # Global layout
+├── components/         # UI components (buttons, forms, modals)
+├── lib/                # Axios config, utils
+├── public/             # Static assets
+├── styles/             # Tailwind config, globals
+├── .env.local          # Environment variables
 └── README.md
-```
+🚀 Getting Started
+1. Clone the repo
+bash
+Copy
+Edit
+git clone https://github.com/your-username/tempshare-frontend.git
+cd tempshare-frontend
+2. Install dependencies
+bash
+Copy
+Edit
+npm install
+# or
+yarn install
+3. Setup environment variables
+Create a .env.local file:
 
----
+env
+Copy
+Edit
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8080  # Your API Gateway base URL
+4. Run the dev server
+bash
+Copy
+Edit
+npm run dev
+# or
+yarn dev
+Visit http://localhost:3000
 
-## ⚙️ Prerequisites
+📦 Features
+✅ File Upload with short link generation
+✅ File download via short link
+✅ View file metadata (expiry time, size)
+✅ Delete file manually
+🌗 Responsive UI with dark/light mode
+⚡ Smooth animations with Framer Motion
+🔐 Environment-based config
 
-* 🔧 Java 17+
-* 📦 Maven or Gradle
-* 🐳 Docker & Docker Compose
-* ☁️ Supabase account (Free tier is sufficient)
+🔗 API Integration
+All requests are proxied through your API Gateway (Spring Cloud Gateway).
 
----
+Action	Method	Endpoint
+Upload file	POST	/upload
+Download file	GET	/download/:short_link
+View metadata	GET	/status/:short_link
+Delete file	DELETE	/delete/:short_link
 
-## 🔐 Supabase Setup
+✅ Configured using axios.create() in lib/axios.ts
+✅ Auth headers (if added) managed via interceptors
 
-* ✅ **Project URL**
-* 🔑 **Service Role Key**
-* 🔓 **Anon Key**
-* 📂 **Storage Bucket**: `uploads`
-* 🗃️ **Database Table**: `files`
-  *(See schema in `metadata-service` or Supabase Studio)*
+🔐 Optional Enhancements
+If your backend supports JWT-based auth:
 
----
+Store token in localStorage
 
-## 🚀 Getting Started
+Inject token via Axios interceptors
 
-1. **Clone the repo:**
+Add login/register pages
 
-   ```bash
-   git clone https://github.com/your-username/tempshare.git
-   cd tempshare
-   ```
+Gate routes using middleware
 
-2. **Configure environment variables** for each service:
+📸 Screenshots (Add yours)
+📤 Upload Page
+🔗 Short Link Display
+⬇️ Download Page
+📝 Status Viewer
 
-   * Supabase URL
-   * Supabase API keys
-   * Bucket name
+🧠 Developer Notes
+Built with modular components (ShadCN)
 
-3. **Build services:**
+Supports both client and server components
 
-   ```bash
-   mvn clean install
-   ```
+Responsive and mobile-friendly
 
-4. **Start the app using Docker Compose:**
+Minimal, clean design with UX-first approach
 
-   ```bash
-   docker-compose up --build
-   ```
+🧪 Testing
+You can use tools like:
 
-5. **Test APIs** using Postman or `curl`.
+Playwright or Cypress for e2e tests
 
----
+Jest + React Testing Library for unit tests
 
-## 🔗 Common API Endpoints
+🎯 Future Plans
+🔐 User accounts and dashboards
 
-| Method   | Endpoint                | Description                            |
-| -------- | ----------------------- | -------------------------------------- |
-| `POST`   | `/upload`               | Upload a file and receive a short link |
-| `GET`    | `/download/:short_link` | Download a file using short link       |
-| `GET`    | `/status/:short_link`   | Get file metadata (expiry, size)       |
-| `DELETE` | `/delete/:short_link`   | Manually delete a file                 |
+📊 File analytics per user
 
-📘 *For detailed request/response bodies, refer to Swagger UI or service-level docs.*
+🌍 i18n support
 
----
+🔗 Expiry UI control (time/download-based)
 
-## 💡 Development Notes
+🙏 Credits
+Next.js
 
-* Each microservice is a standalone Spring Boot app, communicating via **REST**.
-* Configured to work seamlessly with **Supabase**.
-* Environment-specific properties should be defined in `application.yml` or passed as env variables.
-* Ideal for small/medium files (< 50 MB) on Supabase's free tier.
-* Avoid committing secrets like **Service Role Key** to public repos! 🔐
+ShadCN UI
 
----
+Supabase
 
-## 🧠 Tech Stack
-
-* **Java 17**, **Spring Boot**, **Spring Cloud Gateway**
-* **Supabase** (PostgreSQL + Storage)
-* **Docker**, **Docker Compose**
-* Optional: **Swagger/OpenAPI** for documenting APIs
-
----
-
-## 🌟 Credits
-
-* 🏗️ **Supabase** – for robust, scalable backend services
-* ☕ **Spring Boot** – rapid development of microservices
-* 📤 **Open Source Tools** – powering the modern dev ecosystem
-
----
-
-## 🖼️ Future Enhancements
-
-* 📦 Chunked file uploads
-* 📧 Email notifications on upload/download
-* 📊 Admin dashboard (file stats, usage)
-* 🔐 OAuth-based user authentication
-
----
-
+Spring Boot + Microservices
