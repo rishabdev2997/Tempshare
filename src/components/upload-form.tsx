@@ -5,17 +5,22 @@ import axios from "axios";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { UploadCloudIcon } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+
+interface UploadResponse {
+  fileName: string;
+  downloadUri: string;
+  contentType: string;
+}
 
 export default function UploadForm() {
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState("");
   const [maxDownload, setMaxDownload] = useState("");
   const [expiryDateTime, setExpiryDateTime] = useState("");
-  const [response, setResponse] = useState<any>(null);
+  const [response, setResponse] = useState<UploadResponse | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleUpload = async () => {
@@ -45,7 +50,7 @@ export default function UploadForm() {
 
     try {
       setLoading(true);
-      const res = await axios.post(
+      const res = await axios.post<UploadResponse>(
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/upload`,
         formData,
         {
@@ -56,7 +61,7 @@ export default function UploadForm() {
       );
       setResponse(res.data);
       toast.success("File uploaded successfully!");
-    } catch (err) {
+    } catch {
       toast.error("Upload failed. Check your server and try again.");
     } finally {
       setLoading(false);
@@ -72,7 +77,6 @@ export default function UploadForm() {
     >
       <h2 className="text-2xl font-bold text-center">📤 Upload File</h2>
 
-      {/* File Drop Zone */}
       <motion.label
         whileHover={{ scale: 1.02 }}
         className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-400 rounded-lg cursor-pointer hover:border-blue-500 transition"
@@ -126,7 +130,6 @@ export default function UploadForm() {
         </Button>
       </motion.div>
 
-      {/* Upload Response */}
       <AnimatePresence>
         {response && (
           <motion.div
