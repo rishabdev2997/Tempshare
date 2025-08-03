@@ -1,137 +1,160 @@
-🎨 TempShare Frontend
-This is the Next.js 14 frontend for the TempShare microservices file-sharing platform. It offers a clean and responsive interface for uploading, sharing, and downloading files with optional expiry settings.
+# 🎨 TempShare Frontend
 
-🖥️ Live Preview (Optional)
-🧪 Live Demo: https://tempshare.example.com
-(Add once deployed)
+This is the **Next.js 14 frontend** for the **TempShare** microservices-based file-sharing platform. It provides a modern, clean, and responsive interface to upload, share, and download files with optional expiry settings.
 
-⚙️ Tech Stack
-Next.js 14 (App Router)
+---
 
-TypeScript
+## 🖥️ Live Preview (Optional)
 
-ShadCN UI + Tailwind CSS
+> 🔗 **Live Demo**: [https://tempshare.example.com](https://tempshare.example.com) *(Add once deployed)*
 
-Framer Motion (for animations)
+---
 
-Axios (for API requests)
+## ⚙️ Tech Stack
 
-JWT-based Auth (optional)
+- **Next.js 14 (App Router)**
+- **TypeScript**
+- **ShadCN UI** + **Tailwind CSS**
+- **Framer Motion** *(animations)*
+- **Axios** *(API requests)*
+- **JWT-based Auth** *(optional)*
 
-📁 Folder Structure
-php
-Copy
-Edit
+---
+
+## 📁 Folder Structure
+
+```
 frontend/
-├── app/                # App Router pages & layouts
-│   ├── upload/         # Upload file page
-│   ├── download/       # Download file page
-│   ├── status/         # View file metadata
-│   └── layout.tsx      # Global layout
-├── components/         # UI components (buttons, forms, modals)
-├── lib/                # Axios config, utils
-├── public/             # Static assets
-├── styles/             # Tailwind config, globals
-├── .env.local          # Environment variables
-└── README.md
-🚀 Getting Started
-1. Clone the repo
-bash
-Copy
-Edit
+├── app/                  # App Router pages & layouts
+│   ├── upload/           # Upload file page
+│   ├── download/         # Download file page
+│   ├── status/           # View file metadata
+│   └── layout.tsx        # Global layout
+├── components/           # UI components (buttons, forms, modals)
+├── lib/                  # Axios config, utilities
+├── public/               # Static assets
+├── styles/               # Tailwind config and global styles
+├── .env.local            # Environment variables
+└── README.md             # Project documentation
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/your-username/tempshare-frontend.git
 cd tempshare-frontend
-2. Install dependencies
-bash
-Copy
-Edit
+```
+
+### 2. Install dependencies
+
+```bash
 npm install
 # or
 yarn install
-3. Setup environment variables
-Create a .env.local file:
+```
 
-env
-Copy
-Edit
+### 3. Setup environment variables
+
+Create a `.env.local` file:
+
+```env
 NEXT_PUBLIC_API_BASE_URL=http://localhost:8080  # Your API Gateway base URL
-4. Run the dev server
-bash
-Copy
-Edit
+```
+
+### 4. Run the development server
+
+```bash
 npm run dev
 # or
 yarn dev
-Visit http://localhost:3000
+```
 
-📦 Features
-✅ File Upload with short link generation
-✅ File download via short link
-✅ View file metadata (expiry time, size)
-✅ Delete file manually
-🌗 Responsive UI with dark/light mode
-⚡ Smooth animations with Framer Motion
-🔐 Environment-based config
+Visit `http://localhost:3000` in your browser.
 
-🔗 API Integration
-All requests are proxied through your API Gateway (Spring Cloud Gateway).
+---
 
-Action	Method	Endpoint
-Upload file	POST	/upload
-Download file	GET	/download/:short_link
-View metadata	GET	/status/:short_link
-Delete file	DELETE	/delete/:short_link
+## 📦 Features
 
-✅ Configured using axios.create() in lib/axios.ts
-✅ Auth headers (if added) managed via interceptors
+✅ File upload with short link generation  
+✅ Download file via short link  
+✅ View file metadata (expiry time, size)  
+✅ Delete file manually  
+🌗 Responsive UI with dark/light mode  
+⚡ Smooth animations with Framer Motion  
+🔐 Environment-based API config  
 
-🔐 Optional Enhancements
-If your backend supports JWT-based auth:
+---
 
-Store token in localStorage
+## 🔗 API Integration
 
-Inject token via Axios interceptors
+All API requests are routed through the **Spring Cloud Gateway**.
 
-Add login/register pages
+| Action           | Method | Endpoint                    |
+|------------------|--------|-----------------------------|
+| Upload file      | POST   | `/upload`                   |
+| Download file    | GET    | `/download/:short_link`     |
+| View metadata    | GET    | `/status/:short_link`       |
+| Delete file      | DELETE | `/delete/:short_link`       |
 
-Gate routes using middleware
+- Configured via `axios.create()` in `lib/axios.ts`
+- Auth headers (if applicable) handled using interceptors
 
-📸 Screenshots (Add yours)
-📤 Upload Page
-🔗 Short Link Display
-⬇️ Download Page
-📝 Status Viewer
+---
 
-🧠 Developer Notes
-Built with modular components (ShadCN)
+## 🔐 Optional JWT-based Auth
 
-Supports both client and server components
+If your backend supports JWT:
 
-Responsive and mobile-friendly
+- Store token in `localStorage`
+- Inject token via Axios interceptors
+- Add login/register pages
+- Use middleware for route protection
 
-Minimal, clean design with UX-first approach
+---
 
-🧪 Testing
-You can use tools like:
+## 📸 Screenshots *(Add Yours)*
 
-Playwright or Cypress for e2e tests
+- 📤 Upload Page  
+- 🔗 Short Link Display  
+- ⬇️ Download Page  
+- 📝 Metadata Viewer  
 
-Jest + React Testing Library for unit tests
+---
 
-🎯 Future Plans
-🔐 User accounts and dashboards
+## 🧠 Developer Notes
 
-📊 File analytics per user
+- Built with modular components using **ShadCN UI**
+- Supports both **client** and **server** components
+- Fully **responsive** and **mobile-friendly**
+- Clean, **UX-first design**
 
-🌍 i18n support
+---
 
-🔗 Expiry UI control (time/download-based)
+## 🧪 Testing
 
-🙏 Credits
-Next.js
+Use the following tools for testing:
 
-ShadCN UI
+- **Playwright / Cypress** for E2E testing
+- **Jest** + **React Testing Library** for unit testing
 
-Supabase
+---
 
-Spring Boot + Microservices
+## 🎯 Future Plans
+
+- 🔐 User accounts and dashboards  
+- 📊 File analytics per user  
+- 🌍 i18n support  
+- ⏱️ Expiry control UI (time-based or download-limit)
+
+---
+
+## 🙏 Credits
+
+- [Next.js](https://nextjs.org)
+- [ShadCN UI](https://ui.shadcn.com)
+- [Supabase](https://supabase.com)
+- [Spring Boot](https://spring.io/projects/spring-boot)
